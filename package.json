@@ -1,0 +1,35 @@
+{
+  "name": "stylecow-loader",
+  "description": "Stylecow loader for webpack",
+  "keywords": [
+    "webpack",
+    "stylecow",
+    "loader",
+    "css",
+    "process"
+  ],
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=4.0"
+  },
+  "author": "Oscar Otero <oom@oscarotero.com>",
+  "homepage": "https://github.com/stylecow/stylecow-loader",
+  "bugs": "https://github.com/stylecow/stylecow-loader/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stylecow/stylecow-loader.git"
+  },
+  "scripts": {
+    "test": "mocha tests/index.js"
+  },
+  "main": "./lib/index",
+  "license": "MIT",
+  "dependencies": {
+    "loader-utils": "^0.2.11",
+    "stylecow-core": "^2.0.1"
+  },
+  "devDependencies": {
+    "css-loader": "^0.19.0",
+    "style-loader": "^0.12.4"
+  }
+}
