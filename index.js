@@ -1,24 +1,21 @@
-var loaderUtils = require('loader-utils');
-var stylecow = require('stylecow-core');
+var loaderUtils = require('loader-utils'),
+    stylecow    = require('stylecow-core'),
+    plugins     = require('stylecow-plugins');
 
 module.exports = function (source, map) {
-    this.cacheable();
+    this.cacheable && this.cacheable();
 
-    var file   = loaderUtils.getRemainingRequest(this),
-        config = this.options.stylecowLoader,
-        cb     = this.async(),
-        tasks  = new stylecow.Tasks(),
-        coder  = new stylecow.Coder('minify');
+    var file     = loaderUtils.getRemainingRequest(this),
+        config   = this.options.stylecowLoader || {},
+        callback = this.async(),
+        tasks    = new stylecow.Tasks(),
+        coder    = new stylecow.Coder('minify');
 
     if (config.support) {
         tasks.minSupport(config.support);
     }
 
-    if (config.plugins) {
-        config.plugins.forEach(function (plugin) {
-            tasks.use(require('stylecow-plugin-' + plugin));
-        });
-    }
+    tasks.use(plugins(config.plugins));
 
     if (config.modules) {
         config.modules.forEach(function (module) {
@@ -32,5 +29,5 @@ module.exports = function (source, map) {
 
     var code = coder.run(css, file, undefined, map);
 
-    cb(null, code.css, code.map ? JSON.parse(code.map) : {});
+    callback(null, code.css, code.map ? JSON.parse(code.map) : {});
 };
