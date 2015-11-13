@@ -27,7 +27,7 @@ module.exports = function (source, map) {
 
     tasks.run(css);
 
-    var code = coder.run(css, file, undefined, map);
+    var code = coder.run(css, file, map);
 
     callback(null, code.css, code.map ? JSON.parse(code.map) : {});
 };
